@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "poetry_env"
+version = "0.1.0"
+description = ""
+authors = ["Ivan Sakharov <vingving648@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+sqlalchemy = "^2.0.28"
+python-dotenv = "^1.0.1"
+psycopg = "^3.1.18"
+loguru = "^0.7.2"
+translators = "^5.9.0"
+psycopg2-binary = "^2.9.9"
+alembic = "^1.13.1"
+asyncpg = "^0.29.0"
+logtail-python = "^0.2.10"
+pytz = "^2024.1"
+apscheduler = "^3.10.4"
+aiogram-dialog = "^2.1.0"
+mypy = "^1.9.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
