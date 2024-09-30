@@ -1,8 +1,9 @@
 # LifeRPG
 
 ## Introduction
-LifeRPG is an open source task manager based on Gamification methods, especially on RPG games.
-Your hero will have the game attributes:
+LifeRPG is an open-source task management application based on 
+gamification techniques, specifically those used in role-playing games (RPGs).
+Your character will possess the following game attributes:
 - 🌟 Levels
 - ❤ Hearts
 - ⚡ Power
@@ -13,8 +14,8 @@ Your hero will have the game attributes:
 
 
 ## Features
-- Make own `Locations`
-- Make own `Quests` with objective awards
-- Battle with mobs
-- Upgrade your real-life locations
-- Track the real progress of your life
+- Create your own `Locations`
+- Create your own `Quests` with rewards
+- Fight mobs in battles
+- Enhance your real-life experiences
+- Monitor the actual progress of your journey
