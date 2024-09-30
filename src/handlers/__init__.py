@@ -6,13 +6,11 @@ from aiogram.enums import ParseMode
 from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
-from aiogram.filters.callback_data import CallbackData
-
-from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardMarkup
 from aiogram.types import URLInputFile, FSInputFile
+from aiogram.filters.callback_data import CallbackData
+from datetime import datetime
 
-from kb.kb import *
-from kb.inline import *
+from handlers.keyboards import *
 
 from utils.other.emoji import send_emoji
 from utils.db.user import UserOrm

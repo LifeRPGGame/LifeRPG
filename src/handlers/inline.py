@@ -2,7 +2,7 @@ from aiogram import types
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.utils.keyboard import InlineKeyboardMarkup
 
-from . import *
+from kb import *
 from utils.db.location import LocationOrm
 
 
@@ -57,14 +57,14 @@ async def under_location_kb(location_id: int) -> InlineKeyboardMarkup:
         builder.row(
             types.InlineKeyboardButton(
                 text=f'{q.name} {type}',
-                callback_data=f'quest_{q.id}'
+                callback_data=QuestAction(action='see_quest', quest_id=q.id).pack()
             )
         )
 
     builder.row(
         types.InlineKeyboardButton(
             text='➕ Quest',
-            callback_data=QuestAction(action='add_locations_quests', location_id=location_id).pack()
+            callback_data=QuestAction(action='add_quest', location_id=location_id).pack()
         )
     )
     return builder.as_markup()

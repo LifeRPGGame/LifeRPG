@@ -18,7 +18,7 @@ ID: <code>{message.from_user.id}</code>
    
 <b>PROFILE</b>
 ❤ ️Health: {getattr(user, 'hearts')}/{getattr(user, 'max_hearts')} points
-💡 Power: {getattr(user, 'power')}/{getattr(user, 'max_power')} points
+⚡ Power: {getattr(user, 'power')}/{getattr(user, 'max_power')} points
 🌟 Level: {getattr(user, 'level')}
 
 💰 Money: {getattr(user, 'money')}
