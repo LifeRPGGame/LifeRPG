@@ -46,22 +46,13 @@ async def get_name(msg: types.Message, state: FSMContext):
 
 # ------------------------------
 # View locations
-@router.callback_query(F.data.startswith('location_'))
-async def see_location(call: types.CallbackQuery, state: FSMContext):
-	print(f'location is {call.data}')
+@router.callback_query(LocationAction.filter(F.action == 'see'))
+async def location_see(query: types.CallbackQuery, callback_data: LocationAction):
 
-	# Проверка наличия идентификатора локации в данных
-	data_parts = call.data.split('_')
-
-	if len(data_parts) < 2 or not data_parts[1].isdigit():
-		await call.answer("Ошибка: неверный формат данных локации.")
-		return
-
-	# Извлечение ID локации
-	location_id = int(data_parts[1])
+	location_id = callback_data.location_id
 	location = await LocationOrm().get_by_id(location_id=location_id)
 
-	await call.message.answer(
+	await query.message.answer(
 		text=f'''
 🧭 Location: <code>{getattr(location, 'name')}</code>
 

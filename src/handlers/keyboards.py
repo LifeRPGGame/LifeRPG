@@ -11,6 +11,12 @@ from utils.db.location import LocationOrm
 from utils.db.quest import QuestOrm
 
 
+class LocationAction(CallbackData, prefix='location'):
+    action: str
+    location_id: Optional[int] = None
+    quest_id: Optional[int] = None
+
+
 class QuestAction(CallbackData, prefix='quest'):
     action: str
     location_id: Optional[int] = None
@@ -78,14 +84,14 @@ async def locations_kb(user_id: int) -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
     locations = await LocationOrm().get_user_locations(user_id=user_id)
     print(f'user locations is {locations}')
-
     for l in locations:
+        name = getattr(l, 'name')
         builder.row(
             types.InlineKeyboardButton(
-                text=getattr(l, 'name'),
-                callback_data=f'location_{getattr(l, 'id')}'
-            )
+                text=name,
+                callback_data=LocationAction(action='see', location_id=l.id).pack())
         )
+
     return builder.as_markup()
 
 

@@ -129,12 +129,12 @@ and great willpower, but if you do it, it's a huge breakthrough.
 Example: finish a project, win the marathon, complete 1-st chapter of course
 
 So, select the type:
-'''
+''',    reply_markup=types_kb.as_markup()
 	)
 	await state.set_state(AddingQuest.to_get_type)
 
 
-@router.callback_query(F.data.startswith('type_is_', AddingQuest.to_get_type))
+@router.callback_query(F.data.startswith('type_is_'), AddingQuest.to_get_type)
 async def get_type(query: types.CallbackQuery, callback_data: str, state: FSMContext):
 	type = query.data.split('_')[-1]
 	await state.update_data(type=type)
@@ -156,7 +156,7 @@ So, type the benefits:
 	await state.set_state(AddingQuest.to_get_benefits)
 
 
-@router.callback_query(F.data.startswith('benefits_', AddingQuest.to_get_benefits))
+@router.callback_query(F.data.startswith('benefits_'), AddingQuest.to_get_benefits)
 async def get_benefits(query: types.CallbackQuery, callback_data: str, state: FSMContext):
 	benefits = callback_data.split('_')[-1]
 	await state.update_data(benefits=benefits)

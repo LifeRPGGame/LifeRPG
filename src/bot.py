@@ -9,7 +9,6 @@ from handlers import (
 	profile,
     items,
     locations,
-    map,
     quests
 )
 from handlers.battle import battle
@@ -34,7 +33,6 @@ async def bot_task(bot: bot, dp: Dispatcher):
         quests.router,
 
         locations.router,
-        map.router,
 
         # battle processing
         battle.router,

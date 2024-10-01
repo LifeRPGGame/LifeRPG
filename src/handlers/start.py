@@ -35,3 +35,31 @@ and play life more fun!
     )
 
 
+@router.message(F.text == '🗺 Map')
+async def map_handler(message: types.Message, state: FSMContext):
+    await state.clear()
+
+    locations = await LocationOrm().get_user_locations(user_id=message.from_user.id)
+    if not locations:
+        await message.answer(
+            text='''
+<i>Emptiness... 
+But this is only the beginning of something great....
+
+It's time to create your first location with /add_location</i>''',
+            parse_mode=ParseMode.HTML
+        )
+    else:
+        await message.answer(
+            text='Select location:',
+            reply_markup=await locations_kb(user_id=message.from_user.id)
+        )
+
+
+@router.message(F.text == '⚙ Settings')
+async def settings_handler(message: types.Message, state: FSMContext):
+    await state.clear()
+
+    await message.answer(
+        text='There are the settings!'
+    )
