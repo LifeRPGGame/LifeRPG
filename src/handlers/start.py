@@ -56,7 +56,7 @@ It's time to create your first location with /add_location</i>''',
         )
 
 
-@router.message(F.text == '⚙ Settings')
+@router.message(F.text == '⚙️ Settings')
 async def settings_handler(message: types.Message, state: FSMContext):
     await state.clear()
 
