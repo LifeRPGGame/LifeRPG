@@ -1,0 +1,2 @@
+class QuestNameIsLong(Exception):
+	pass
