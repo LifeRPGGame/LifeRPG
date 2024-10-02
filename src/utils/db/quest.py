@@ -49,6 +49,17 @@ class QuestOrm:
 				)
 				await session.commit()
 
+	async def delete(self, quest_id: int) -> bool:
+		async with async_session() as session:
+			async with session.begin():
+				query = delete(
+							QuestModel
+						).where(
+							QuestModel.id == quest_id
+				)
+				await session.execute(query)
+				await session.commit()
+
 	async def get_location_quests(self, location_id: int) -> list[Quest]:
 		async with async_session() as session:
 			async with session.begin():
