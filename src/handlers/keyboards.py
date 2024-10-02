@@ -19,6 +19,7 @@ class LocationAction(CallbackData, prefix='location'):
 
 class QuestAction(CallbackData, prefix='quest'):
     action: str
+    quest_id: Optional[int] = None
     location_id: Optional[int] = None
 
 
