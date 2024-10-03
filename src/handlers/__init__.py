@@ -1,4 +1,5 @@
 from aiogram import types
+from aiogram import Bot
 from typing import Optional
 from aiogram import Router, F
 from aiogram.filters import Command

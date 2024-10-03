@@ -69,3 +69,10 @@ class LocationOrm:
 						user_id=i.LocationModel.user_id,
 						name=i.LocationModel.name
 					)
+
+	async def delete(self, location_id: int) -> None:
+		async with async_session() as session:
+			async with session.begin():
+				query = delete(LocationModel).where(LocationModel.id == location_id)
+				await session.execute(query)
+				await session.commit()

@@ -1,5 +1,6 @@
 import sqlalchemy
 import datetime
+import pytz
 from typing import Union
 from sqlalchemy import select, update, func, delete
 from pydantic import BaseModel
@@ -7,6 +8,7 @@ from pydantic import BaseModel
 from . import async_session
 from utils.db.models import *
 from utils.logging.logger import logger
+from utils.config import MY_TIMEZONE
 
 
 class Quest(BaseModel):
@@ -16,6 +18,7 @@ class Quest(BaseModel):
 	name: str
 	type: str
 	benefits: str
+	add_time: datetime.datetime
 
 
 class QuestOrm:
@@ -31,6 +34,7 @@ class QuestOrm:
 							location_id=q.QuestModel.location_id,
 							user_id=q.QuestModel.user_id,
 							name=q.QuestModel.name,
+							add_time=q.QuestModel.add_time.astimezone(MY_TIMEZONE)
 						)
 					)
 				return res
@@ -44,7 +48,8 @@ class QuestOrm:
 						name=name,
 						type=type,
 						location_id=location_id,
-						benefits=benefits
+						benefits=benefits,
+						add_time=datetime.datetime.now(MY_TIMEZONE)
 					)
 				)
 				await session.commit()
@@ -74,6 +79,7 @@ class QuestOrm:
 							user_id=q.QuestModel.user_id,
 							type=q.QuestModel.type,
 							benefits=q.QuestModel.benefits,
+							add_time=q.QuestModel.add_time.astimezone(MY_TIMEZONE)
 						)
 					)
 				return res
@@ -90,4 +96,5 @@ class QuestOrm:
 						user_id=q.QuestModel.user_id,
 						type=q.QuestModel.type,
 						benefits=q.QuestModel.benefits,
+						add_time=q.QuestModel.add_time.astimezone(MY_TIMEZONE)
 					)

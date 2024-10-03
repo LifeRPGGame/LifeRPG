@@ -17,10 +17,11 @@ Username: @{message.from_user.username}
 ID: <code>{message.from_user.id}</code>     
    
 <b>PROFILE</b>
+🌟 Level: {getattr(user, 'level')}
+🌀 Experience: {getattr(user, 'experience')}
+
 ❤ ️Health: {getattr(user, 'hearts')}/{getattr(user, 'max_hearts')} points
 ⚡ Power: {getattr(user, 'power')}/{getattr(user, 'max_power')} points
-🌟 Level: {getattr(user, 'level')}
-
 💰 Money: {getattr(user, 'money')}
 ''',    parse_mode=ParseMode.HTML,
         reply_markup=profile_kb

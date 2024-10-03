@@ -51,7 +51,7 @@ It's time to create your first location with /add_location</i>''',
         )
     else:
         await message.answer(
-            text='Select location:',
+            text='Select a location below or create a new one with /add_location',
             reply_markup=await locations_kb(user_id=message.from_user.id)
         )
 

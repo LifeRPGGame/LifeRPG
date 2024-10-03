@@ -1,7 +1,9 @@
 import aiogram
+from datetime import datetime, timedelta
 
 from . import *
 from utils.exceptions import *
+from utils.config import MY_TIMEZONE, get_quest_settings
 
 
 router = Router()
@@ -45,11 +47,40 @@ async def see_one_quest(query: types.CallbackQuery, callback_data: QuestAction):
 <b>📌 Quest</b>
 Name: {getattr(quest, 'name')} {type_emoji}
 Type: {type_name}
-
 Benefits: {getattr(quest, 'benefits')}
+
+⏰ Created: {(getattr(quest, 'add_time')).strftime('%Y.%m.%d %H:%M:%S')}
 ''',    reply_markup=under_quest_kb.as_markup(),
 		parse_mode=ParseMode.HTML,
 	)
+
+
+########################################################################
+# Finish a quest
+@router.callback_query(QuestAction.filter(F.action == 'finish_quest'))
+async def finish_quest(query: types.CallbackQuery, callback_data: QuestAction):
+	quest = await QuestOrm().get_quest(quest_id=callback_data.quest_id)
+	add_time = quest.add_time
+	now_time = datetime.now(tz=MY_TIMEZONE)
+	diff = now_time - add_time
+
+	quest_info = await get_quest_settings(quest.type)  # quest info from default settings
+	minutes_for_type = quest_info[3]
+
+	if diff > timedelta(minutes=minutes_for_type):
+		await UserOrm().plus_value(
+			user_id=query.from_user.id,
+			money=quest_info[2],
+			experience=quest_info[1]
+		)
+		await query.answer(text='✅ The quest successfully finished!', show_alert=True)
+		return
+	else:
+		await query.answer(
+			text=f'🛑 It should take at least {minutes_for_type} minutes to close the quest!',
+			show_alert=True
+		)
+		return
 
 
 #########################################################################

@@ -84,7 +84,7 @@ food_kb = ReplyKeyboardMarkup(
 async def locations_kb(user_id: int) -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
     locations = await LocationOrm().get_user_locations(user_id=user_id)
-    print(f'user locations is {locations}')
+    # print(f'user locations is {locations}')
     for l in locations:
         name = getattr(l, 'name')
         builder.row(
@@ -120,8 +120,16 @@ async def benefits_kb() -> InlineKeyboardMarkup:
 
 async def under_location_kb(location_id: int) -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
+
+    builder.row(
+        types.InlineKeyboardButton(
+            text='🗑️ Delete location',
+            callback_data=LocationAction(action='delete', location_id=location_id).pack()
+        )
+    )
+
     quests = await QuestOrm().get_location_quests(location_id=location_id)
-    print(f'quests is {quests}')
+    # print(f'quests is {quests}')
     for q in quests:
         if q.type == 'easy':
             type = '☀️ '

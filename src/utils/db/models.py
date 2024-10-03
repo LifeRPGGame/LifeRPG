@@ -43,7 +43,8 @@ class UserModel(Base):
 
     hearts: Mapped[int] = mapped_column(Integer, default=20)
     power: Mapped[int] = mapped_column(Integer, default=10)
-    money: Mapped[float] = mapped_column(Float, default=0)
+    money: Mapped[float] = mapped_column(Integer, default=0)
+    experience: Mapped[int] = mapped_column(Integer, default=0)
     level: Mapped[int] = mapped_column(Integer, default=1)
     max_hearts: Mapped[int] = mapped_column(Integer, default=20)
     max_power: Mapped[int] = mapped_column(Integer, default=10)
@@ -65,6 +66,7 @@ class QuestModel(Base):
     type: Mapped[str] = mapped_column(String, unique=False)
     name: Mapped[str] = mapped_column(String(50), unique=False)
     benefits: Mapped[str] = mapped_column(String(50), unique=False)
+    add_time: Mapped[str] = mapped_column(DateTime(timezone=True))
 
 
 class LocationModel(Base):

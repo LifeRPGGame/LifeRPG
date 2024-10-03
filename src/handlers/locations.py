@@ -57,13 +57,23 @@ async def location_see(query: types.CallbackQuery, callback_data: LocationAction
 🧭 Location: <code>{getattr(location, 'name')}</code>
 
 ⭐ Level: 1
-🔹 Location`s Experience: 0 points
+🔹 Location Experience: 0 points
 ✴ Boosters: None
-
-⏰ Created: {datetime.now()}
 
 ''',
 		parse_mode=ParseMode.HTML,
 		reply_markup=await under_location_kb(location_id=location_id)
 	)
 
+
+@router.callback_query(LocationAction.filter(F.action == 'delete'))
+async def delete_location(query: types.CallbackQuery, callback_data: LocationAction, bot: Bot):
+	await LocationOrm().delete(location_id=callback_data.location_id)
+	await query.answer(text='✅ Location was successfully delete', show_alert=True)
+
+	await bot.delete_messages(
+		chat_id=query.from_user.id,
+		message_ids=[
+			query.message.message_id,
+			query.message.message_id - 1]
+	)

@@ -1,0 +1,39 @@
+title = "Defailt game settings"
+
+# Quest table
+[[quests]]
+complexity = 'easy'
+experience = 1
+coins = 2
+cooldown_mins = 15  # minimum delay to finish a quest
+
+[[quests]]
+complexity = 'middle'
+experience = 3
+coins = 5
+cooldown_mins = 30
+
+
+[[quests]]
+complexity = 'boss'
+experience = 5
+coins = 10
+cooldown_mins = 360
+
+
+# Levels table
+[[levels]]
+level = 2
+experience = 10
+
+[[levels]]
+level = 3
+experience = 30
+
+[[levels]]
+level = 4
+experience = 70
+
+[[levels]]
+level = 5
+experience = 100
