@@ -1,5 +1,5 @@
 # LifeRPG
-[![wakatime](https://wakatime.com/badge/user/018ce029-5220-4722-881d-fc5406c5e923/project/3180761b-ecef-4283-86e3-cf8bbff5d218.svg)](https://wakatime.com/badge/user/018ce029-5220-4722-881d-fc5406c5e923/project/3180761b-ecef-4283-86e3-cf8bbff5d218)
+![wakatime](https://wakatime.com/badge/user/018ce029-5220-4722-881d-fc5406c5e923/project/3180761b-ecef-4283-86e3-cf8bbff5d218.svg)
 
 ## Introduction
 LifeRPG is an open-source task management application based on 
