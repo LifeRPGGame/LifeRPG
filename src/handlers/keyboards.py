@@ -30,6 +30,9 @@ main_kb = [
             types.KeyboardButton(text='👤 Profile'),
             types.KeyboardButton(text='🗺 Map'),
             types.KeyboardButton(text='⚙️ Settings')
+        ],
+        [
+            types.KeyboardButton(text='🪓 PvP'),
         ]
     ]
 menu_kb = ReplyKeyboardMarkup(

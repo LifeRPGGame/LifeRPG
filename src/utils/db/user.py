@@ -10,20 +10,20 @@ from utils.logging.logger import logger
 
 
 class User(BaseModel):
-    user_id: int
-    username: str
-    full_name: str
-    join_time: datetime.datetime
-    is_banned: bool
-    welcome_notif_id: int   
-    feature_notif_id: int
-    hearts: int
-    power: int
-    money: int
-    experience: int
-    level: int
-    max_hearts: int
-    max_power: int
+    user_id: int = None
+    username: str = None
+    full_name: str = None
+    join_time: datetime.datetime = None
+    is_banned: bool = None
+    welcome_notif_id: int = None
+    feature_notif_id: int = None
+    hearts: int = None
+    power: int = None
+    money: int = None
+    experience: int = None
+    level: int = None
+    max_hearts: int = None
+    max_power: int = None
 
 
 class UserOrm:

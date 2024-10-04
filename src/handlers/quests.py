@@ -121,7 +121,7 @@ The first field is name.
 Most popular: clean-up home, do homework, do exercise, clear desk, walk.
 
 💡 By the way, it is not necessary to name the quest in simple words. 
-You can also call it game words, let's say "Preparing for battle" 
+You can also call it game words, let's say "Preparing for pvp" 
 (which, let's say, means breakfast)
 
 So, type your quest name:

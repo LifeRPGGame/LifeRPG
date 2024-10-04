@@ -11,7 +11,7 @@ from handlers import (
     locations,
     quests
 )
-from handlers.battle import battle
+from handlers.pvp import pvp
 
 from middlewares.user_ban import CheckUserWasBannedMiddleware
 
@@ -34,8 +34,8 @@ async def bot_task(bot: bot, dp: Dispatcher):
 
         locations.router,
 
-        # battle processing
-        battle.router,
+        # pvp processing
+        pvp.router,
     )
     dp.message.middleware(CheckUserWasBannedMiddleware())
 
