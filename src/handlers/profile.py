@@ -1,4 +1,5 @@
-from . import * 
+from . import *
+from utils.config import get_inventory_count_for_level
 
 
 router = Router()
@@ -10,7 +11,7 @@ async def profile(message: types.Message, state: FSMContext):
     user = await UserOrm().get(user_id=message.from_user.id)
     await message.answer_photo(
         photo=FSInputFile(
-            'images/hero.png'
+            'images/hero.jpg'
         ),
         caption=f'''
 Username: @{message.from_user.username}
@@ -34,12 +35,12 @@ async def see_equipment(message: types.Message, state: FSMContext):
     await message.answer(
         text='''
 <b>EQUIPMENT</b>
-🗡️ Weapon: <code>None</code>
+🔫 Weapon: <code>None</code>
+
 🪖 Helmet: <code>None</code>
 👕 Armor: <code>None</code>
 🩳 Pants: <code>None</code>
 🥾 Boots: <code>None</code>
-🗡️ Weapon: <code>None</code>
 <i>Unwear all clothes:</i> /unwear
 <i>Sell all clothes:</i> /s_wear''',
         parse_mode=ParseMode.HTML,
@@ -47,23 +48,30 @@ async def see_equipment(message: types.Message, state: FSMContext):
     )
 
 
-@router.message(F.text == '🍎 Food')
-async def see_food(message: types.Message, state: FSMContext):
-    inventory_foods = await InventoryOrm().get_inventory_of_type(user_id=message.from_user.id, type='food')
-    print(inventory_foods)
-    foods_display = ''
+@router.message(F.text == '📦 Inventory')
+async def see_all_inventory(message: types.Message, state: FSMContext):
+    user = await UserOrm().get(user_id=message.from_user.id)
+    max_inventory_count = await get_inventory_count_for_level(user.level)
+    print('max_inventory_count', max_inventory_count)
+    inventory = await InventoryOrm().get_inventory(user_id=message.from_user.id)
+    result = ''
 
-    for f in inventory_foods:
-        name = getattr(await ItemOrm().get(item_id=f.item_id), 'name')
-        item_id = getattr(await ItemOrm().get(item_id=f.item_id), 'id')
+    for item in inventory:
 
-        foods_display += f'''
-{name} <i>🍴: /use_{f.hash_id}</i> <i>ℹ: /info_{item_id}</i>'''
+        name = getattr(await ItemOrm().get(item_id=item.item_id), 'name')
+        item_id = getattr(await ItemOrm().get(item_id=item.item_id), 'id')
+        type = getattr(await ItemOrm().get(item_id=item.item_id), 'type')
+
+        if type == 'food':
+            result += f'''
+{name} <i>🍽 /use_{item.hash_id}</i> <i>ℹ: /info_{item_id}</i>'''
+
+
 
     await message.answer(
         text=f'''
-🍎 Food({len(inventory_foods)}/10):
-{foods_display if foods_display != '' else '<i>No food...</i>'}
+Your inventory({len(inventory)}/{max_inventory_count}):
+{result if result != '' else '<i>No items...</i>'}
 ''',
         parse_mode=ParseMode.HTML,
         reply_markup=food_kb

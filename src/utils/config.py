@@ -24,3 +24,11 @@ async def get_quest_settings(quest_complexity: str) -> list:
 	for q in quests:
 		if q['complexity'] == quest_complexity:
 			return [q['complexity'], q['experience'], q['coins'], q['cooldown_mins']]
+
+
+async def get_inventory_count_for_level(level: int) -> int:
+	file = toml.load('default_settings.toml')
+	inventory_count = file['inventory']
+	for c in inventory_count:
+		if c['level'] == level:
+			return c['inventory_count']

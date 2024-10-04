@@ -6,9 +6,13 @@ from pydantic import BaseModel
 from random import randint
 
 from . import async_session
-from utils.db.models import *
 from utils.logging.logger import logger
+from utils.db.models import *
+from utils.db.user import UserOrm
 from utils.db.item import ItemOrm
+
+from utils.config import get_inventory_count_for_level
+from utils.exceptions import *
 
 
 class InventoryItem(BaseModel):
@@ -30,6 +34,19 @@ class InventoryOrm:
 	) -> None:
 		async with async_session() as session:
 			async with session.begin():
+				print('начало добавления в инвентарь...')
+
+				item = await ItemOrm().get(item_id=item_id)
+				count_of_type = len(await self.get_inventory_of_type(user_id=user_id, type=item.type))
+				print(f'количества предметов до добавления: {count_of_type}')
+
+				user = await UserOrm().get(user_id=user_id)
+				max_inventory_count = await get_inventory_count_for_level(level=user.level)
+				print(f'макс кол-во предметов для уровня пользователя: {max_inventory_count}')
+
+				if count_of_type >= max_inventory_count:
+					raise UserInventoryIsFull()
+
 				session.add(
 					InventoryModel(
 						hash_id=await generate_inventory_item_hash_id(),

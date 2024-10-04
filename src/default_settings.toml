@@ -1,4 +1,4 @@
-title = "Defailt game settings"
+title = "Default game settings"
 
 # Quest table
 [[quests]]
@@ -37,3 +37,26 @@ experience = 70
 [[levels]]
 level = 5
 experience = 100
+
+
+# Inventory count
+[[inventory]]
+level = 1
+inventory_count = 10
+
+[[inventory]]
+level = 2
+inventory_count = 15
+
+[[inventory]]
+level = 3
+inventory_count = 25
+
+[[inventory]]
+level = 4
+inventory_count = 35
+
+[[inventory]]
+level = 5
+inventory_count = 40
+

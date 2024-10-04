@@ -29,7 +29,7 @@ main_kb = [
         [ 
             types.KeyboardButton(text='👤 Profile'),
             types.KeyboardButton(text='🗺 Map'),
-            types.KeyboardButton(text='⚙️ Settings')
+            types.KeyboardButton(text='⚙ Settings')
         ],
         [
             types.KeyboardButton(text='🪓 PvP'),
@@ -46,7 +46,7 @@ menu_kb = ReplyKeyboardMarkup(
 profile_buttons = [
     [
         types.KeyboardButton(text='🎽 Equipment'),
-        types.KeyboardButton(text='🍎 Food')
+        types.KeyboardButton(text='📦 Inventory')
     ],
     [
         types.KeyboardButton(text='🔙 Menu')
@@ -135,7 +135,7 @@ async def under_location_kb(location_id: int) -> InlineKeyboardMarkup:
     # print(f'quests is {quests}')
     for q in quests:
         if q.type == 'easy':
-            type = '☀️ '
+            type = '☀'
         elif q.type == 'middle':
             type = '👾'
         elif q.type == 'boss':

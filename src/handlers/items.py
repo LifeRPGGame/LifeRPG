@@ -28,7 +28,7 @@ async def see_info_about_item(message: types.Message):
 		case 'food':
 			await message.answer(
 				text=f'''
-🍎 Food: {getattr(item, 'name')}
+🥩 Food: {getattr(item, 'name')}
 {getattr(item, 'description')}
 
 <b>Heal:</b> +{getattr(item, 'heal')} ❤
