@@ -38,12 +38,9 @@ async def start_pvp(message: types.Message):
         message=message,
         emoji='⏳',
         time=3.5,
+        times=3
     )
-    await send_emoji(
-        message=message,
-        emoji='⏳',
-        time=3.5,
-    )
+
     opponent = User(
         user_id=3333333,
         username='Pashka',

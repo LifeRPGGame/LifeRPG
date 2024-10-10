@@ -47,8 +47,8 @@ async def bot_task(bot: bot, dp: Dispatcher):
 
 async def additional_tasks(bot, dp):
     scheduler = AsyncIOScheduler()
-    gift_sender = Gift(bot=bot, dp=dp)
-    scheduler.add_job(gift_sender.send_gift, 'interval', seconds=60)
+    # gift_sender = Gift(bot=bot, dp=dp)
+    # scheduler.add_job(gift_sender.send_gift, 'interval', seconds=60)
 
     scheduler.start()
 

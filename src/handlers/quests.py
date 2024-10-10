@@ -73,7 +73,9 @@ async def finish_quest(query: types.CallbackQuery, callback_data: QuestAction):
 			money=quest_info[2],
 			experience=quest_info[1]
 		)
-		await query.answer(text='✅ The quest successfully finished!', show_alert=True)
+		await query.answer(
+			text=f'✅ The quest successfully finished!\nResult: \nExperience: +{quest_info[1]}\nMoney: +{quest_info[2]}',
+			show_alert=True)
 		return
 	else:
 		await query.answer(

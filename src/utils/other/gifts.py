@@ -17,7 +17,7 @@ class Gift:
 			chat_id=MODERATOR_ID,
 			text=f'''
 🎉 You got a gift:
-Apple x2
+Apple x1
 
 ''')
 		try:
@@ -28,5 +28,5 @@ Apple x2
 		except UserInventoryIsFull:
 			await self.bot.send_message(
 				chat_id=MODERATOR_ID,
-				text='Your inventory is full. You lost the gift: Apple'
+				text='Your inventory is full. You lost the gift: Apple \nMake room or upgrade your inventory'
 			)
