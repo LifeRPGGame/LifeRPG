@@ -2,6 +2,7 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
     async_sessionmaker
 )
+from typing import Optional
 
 from utils.config import DSN
 

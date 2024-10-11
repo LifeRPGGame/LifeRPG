@@ -49,6 +49,12 @@ class UserModel(Base):
     max_hearts: Mapped[int] = mapped_column(Integer, default=20)
     max_power: Mapped[int] = mapped_column(Integer, default=10)
 
+    weapon: Mapped[int] = mapped_column(Integer, nullable=True)
+    helmet: Mapped[int] = mapped_column(Integer, nullable=True)
+    armor: Mapped[int] = mapped_column(Integer, nullable=True)
+    pants: Mapped[int] = mapped_column(Integer, nullable=True)
+    boots: Mapped[int] = mapped_column(Integer, nullable=True)
+
     __table_args__ = (
         CheckConstraint('hearts >= 0', name='check_hearts_non_negative'),
         CheckConstraint('power >= 0', name='check_power_non_negative'),

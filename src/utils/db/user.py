@@ -4,7 +4,7 @@ from typing import Union
 from sqlalchemy import select, update, func, delete
 from pydantic import BaseModel
 
-from . import async_session
+from . import *
 from utils.db.models import *
 from utils.logging.logger import logger
 
@@ -24,6 +24,12 @@ class User(BaseModel):
     level: int = None
     max_hearts: int = None
     max_power: int = None
+
+    weapon: Optional[int]
+    helmet: Optional[int]
+    armor: Optional[int]
+    pants: Optional[int]
+    boots: Optional[int]
 
 
 class UserOrm:
@@ -78,7 +84,12 @@ class UserOrm:
                     experience=i.UserModel.experience,
                     level=i.UserModel.level,
                     max_hearts=i.UserModel.max_hearts,
-                    max_power=i.UserModel.max_power
+                    max_power=i.UserModel.max_power,
+                    weapon=i.UserModel.weapon,
+                    helmet=i.UserModel.helmet,
+                    armor=i.UserModel.armor,
+                    pants=i.UserModel.pants,
+                    boots=i.UserModel.boots
                 )
 
     async def plus_value(

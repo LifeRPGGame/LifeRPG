@@ -1,18 +1,25 @@
 import random
+import asyncio
+
+from utils.db.user import UserOrm
 
 
 # Класс персонажа
 class Character:
-	def __init__(self, name, hp, attack):
-		self.name = name
-		self.hp = hp
-		self.attack = attack
+	def __init__(
+			self,
+			user_id: int,
+			username: str = None
+	):
+		self.username = username
+		self.hearts = (asyncio.run(UserOrm().get(user_id=user_id))).hearts
+		self.attack = 0
 
 	def is_alive(self):
-		return self.hp > 0
+		return self.hearts > 0
 
 	def take_damage(self, damage):
-		self.hp -= damage
+		self.hearts -= damage
 
 	def attack_mob(self, mob):
 		damage = random.randint(1, self.attack)
@@ -47,17 +54,17 @@ class Battle:
 
 	def player_turn(self):
 		damage = self.player.attack_mob(self.mob)
-		return f"🧔‍ {self.player.name} 🔪 🧟 {self.mob.name} ({damage} 💥)"
+		return f"🧔‍ {self.player.username} 🔪 🧟 {self.mob.username} ({damage} 💥)"
 
 	def mob_turn(self):
 		damage = self.mob.attack_character(self.player)
-		return f"🧟 {self.mob.name} 🔪 🧔 {self.player.name} ({damage} 💥)"
+		return f"🧟 {self.mob.username} 🔪 🧔 {self.player.username} ({damage} 💥)"
 
 	def check_winner(self):
 		if not self.player.is_alive():
-			return f"💀 {self.player.name} вы были убиты!"
+			return f"💀 {self.player.username} вы были убиты!"
 		elif not self.mob.is_alive():
-			return f"🎉 {self.mob.name} враг побежден!"
+			return f"🎉 {self.mob.username} враг побежден!"
 		return None
 
 
@@ -79,7 +86,7 @@ def start_battle(user_id, player_name):
 	else:
 		battle = create_battle(player_name)
 		active_battles[user_id] = battle
-		return f"Начался бой! {player_name} против {battle.mob.name}! Ударь моба командой /attack."
+		return f"Начался бой! {player_name} против {battle.mob.username}! Ударь моба командой /attack."
 
 
 def attack(user_id) -> str | None:
