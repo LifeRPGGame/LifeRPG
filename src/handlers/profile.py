@@ -57,16 +57,17 @@ async def see_all_inventory(message: types.Message, state: FSMContext):
     result = ''
 
     for item in inventory:
-
         name = getattr(await ItemOrm().get(item_id=item.item_id), 'name')
         item_id = getattr(await ItemOrm().get(item_id=item.item_id), 'id')
         type = getattr(await ItemOrm().get(item_id=item.item_id), 'type')
 
         if type == 'food':
             result += f'''
-{name} <i>🍽 /use_{item.hash_id}</i> <i>ℹ: /info_{item_id}</i>'''
-
-
+{name} 
+<i>🍽 /use_{item.hash_id}</i> 
+<i>🗑 /del_{item.hash_id}</i>
+<i>ℹ /info_{item_id}</i>
+'''
 
     await message.answer(
         text=f'''
@@ -75,4 +76,4 @@ Your inventory({len(inventory)}/{max_inventory_count}):
 ''',
         parse_mode=ParseMode.HTML,
         reply_markup=food_kb
-)
+    )
