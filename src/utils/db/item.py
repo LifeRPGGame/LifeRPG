@@ -7,7 +7,6 @@ from pydantic import BaseModel
 
 from . import async_session
 from utils.db.models import *
-from utils.logging.logger import logger
 
 
 class Item(BaseModel):

@@ -3,7 +3,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from aiogram import Bot, Dispatcher
 
 from utils.config import BOT_KEY
-from utils.logging.logger import logger
+from utils.logging.logger import BotLogger
 from handlers import (
 	start,
 	profile,
@@ -24,7 +24,7 @@ dp = Dispatcher()
 async def bot_task(bot: bot, dp: Dispatcher):
     from utils.db.models import init_db
     await init_db()
-    # await logger.info('☑️ Запуск бота...', send_alert=True)
+    # await BotLogger().info('☑️ Запуск бота...', send_alert=True)
 
     dp.include_routers(
         start.router,
@@ -39,7 +39,7 @@ async def bot_task(bot: bot, dp: Dispatcher):
     )
     dp.message.middleware(CheckUserWasBannedMiddleware())
 
-    await logger.info('✅ Бот запущен', send_alert=True)
+    await BotLogger().info('✅ Бот запущен', send_alert=True)
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot, polling_timeout=11)

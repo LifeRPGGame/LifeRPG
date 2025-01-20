@@ -6,7 +6,6 @@ from pydantic import BaseModel
 from random import randint
 
 from . import async_session
-from utils.logging.logger import logger
 from utils.db.models import *
 from utils.db.user import UserOrm
 from utils.db.item import ItemOrm
@@ -154,4 +153,3 @@ class InventoryOrm:
 						is_clothed=i.InventoryModel.is_clothed,
 						is_weaponed=i.InventoryModel.is_weaponed,
 					)
-

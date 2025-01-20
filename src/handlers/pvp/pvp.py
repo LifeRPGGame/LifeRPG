@@ -90,5 +90,3 @@ async def attack_mob(message: types.Message):
         else:
             # print(f'Сообщение 1: {msg_1}')
             await message.answer(messages[0])
-
-

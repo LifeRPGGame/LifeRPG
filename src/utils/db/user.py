@@ -6,7 +6,6 @@ from pydantic import BaseModel
 
 from . import *
 from utils.db.models import *
-from utils.logging.logger import logger
 
 
 class User(BaseModel):

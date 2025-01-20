@@ -9,4 +9,3 @@ from aiogram.fsm.state import StatesGroup, State
 from aiogram.filters.callback_data import CallbackData
 
 from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardMarkup
-from aiogram.types import URLInputFile, FSInputFile

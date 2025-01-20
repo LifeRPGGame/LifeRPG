@@ -1,4 +1,3 @@
-import asyncio
 from sqlalchemy.orm import (
     Mapped,
     mapped_column,
@@ -18,12 +17,11 @@ from sqlalchemy import (
     UniqueConstraint,
     TIME
 )
-from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy import CheckConstraint
 
 
 from utils.config import DSN
-from utils.logging.logger import logger
+from utils.logging.logger import BotLogger
 
 meta = MetaData()
 Base = declarative_base(metadata=meta)
@@ -111,6 +109,6 @@ async def init_db():
             await conn.run_sync(meta.create_all)
     except Exception as e:
         if "already exists" in str(e):
-            await logger.info('✅ БД уже существуют')
+            await BotLogger().info('✅ БД уже существуют')
         else:
-            await logger.critical(f'Databases crashed: {e}')
+            await BotLogger().critical(f'Databases crashed: {e}')

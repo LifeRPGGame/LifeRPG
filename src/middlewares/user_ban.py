@@ -3,9 +3,6 @@ from aiogram.types import TelegramObject
 from typing import Callable, Dict, Any, Awaitable
 
 from utils.db.user import *
-from utils.logging.logger import logger
-
-import asyncio
 
 
 class CheckUserWasBannedMiddleware(BaseMiddleware):
